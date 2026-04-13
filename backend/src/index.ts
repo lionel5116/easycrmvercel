@@ -44,9 +44,11 @@ app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-// ─── Boot ────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`EasyCRM API running on http://localhost:${PORT}`);
-});
+// ─── Boot (local dev only — Vercel handles the server in production) ─────────
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`EasyCRM API running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;
